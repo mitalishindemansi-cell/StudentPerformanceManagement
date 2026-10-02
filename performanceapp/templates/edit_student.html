@@ -1,0 +1,83 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-edit"></i>Edit Student Info</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{% if m.tags == 'error' %}danger{% else%}{{m.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="fullname" class="form-lebel">FullName</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" required placeholder="Enter FullName" value="{{student_obj.name}}">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="rollid" class="form-lebel">Roll ID</label>
+            <input type="text" class="form-control" id="rollid" name="rollid" required placeholder="Roll Number" maxlength="12" value="{{student_obj.roll_id}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="emailid" class="form-lebel">Email ID</label>
+            <input type="text" class="form-control" id="emailid" name="emailid" required placeholder="Email ID" value="{{student_obj.email}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-lebel">Gender</label><br/>
+            <div class="form-check form-check-inline">
+            
+            <input type="radio" class="form-check-input" id="gender" name="gender" required value="Male" {% if student_obj.gender == "Male" %} checked{% endif %}>
+            <label class="form-check-label">Male</label>
+            </div>
+            <div class="'form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="gender" name="gender" required value="Female" {% if student_obj.gender == "Female" %} checked{% endif %}>
+            <label class="'form-check-label">Female</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="department" class="form-lebel">Select Department</label>
+            <input type="text" class="form-control" id="department" name="department" value="{{student_obj.student_department.department_name}}{{student_obj.student_department.section}}" readonly>
+        </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="dob" class="form-lebel">Date Of Birth</label>
+            <input type="date" class="form-control" id="dob" name="dob" required value="{{student_obj.dob}}">
+        </div>
+
+         <div class="mb-3">
+            <label for="regdate" class="form-lebel">Reg. Date</label>
+            <input type="text" class="form-control" id="regdate" name="regdate" required value="{{student_obj.reg_date}}" readonly>
+        </div>
+
+
+            <div class="mb-3">
+            <label class="form-lebel">Status</label><br/>
+            <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="status" name="status" required value="1" {% if student_obj.status == 1 %} checked{% endif %}>
+            <label class="form-check-label">Active</label>
+            </div>
+            <div class="'form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="status" name="status" required value="0" {% if student_obj.status == 0 %} checked{% endif %}>
+            <label class="'form-check-label">Inactive</label>
+            </div>
+        </div>
+
+        
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-check-circle me-1"></i>Submit
+        </button>
+    </form>
+</div>
+
+
+{% endblock %}

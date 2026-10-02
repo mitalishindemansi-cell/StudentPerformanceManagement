@@ -1,0 +1,36 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-edit"></i>Edit Subject</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{% if m.tags == 'error' %}danger{% else%}{{m.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="subjectname" class="form-lebel">Subject Name</label>
+            <input type="text" class="form-control" id="subjectname" name="subjectname" required placeholder="e.g. Physics, Chemistry" value="{{subject_obj.subject_name}}">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="subjectcode" class="form-lebel">Subject Code</label>
+            <input type="text" class="form-control" id="subjectcode" name="subjectcode" required placeholder="e.g. BT101, BT102"value="{{subject_obj.subject_code}}">
+        </div>
+
+       
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-check-circle me-1"></i>Submit
+        </button>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-edit"></i>Edit Student Department</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{% if m.tags == 'error' %}danger{% else%}{{m.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="department" class="form-lebel">Department Name</label>
+            <input type="text" class="form-control" id="department" name="department" required placeholder="Enter Department Name" value="{{department_obj.department_name}}">
+            <small class="text-mutesd">e.g., CSE, IT, AIML</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="departmentnumeric" class="form-lebel">Department Name in Numeric</label>
+            <input type="text" class="form-control" id="departmentnumeric" name="departmentnumeric" required placeholder="Enter Department Name in Numeric" value="{{department_obj.department_numeric}}">
+            <small class="text-mutesd">e.g., 1, 2, 3</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="section" class="form-lebel">Section</label>
+            <input type="text" class="form-control" id="section" name="section" required placeholder="Enter Section"value="{{department_obj.section}}">
+            <small class="text-mutesd">e.g., A, B, C</small>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-check-circle me-1"></i>Submit
+        </button>
+    </form>
+</div>
+
+
+{% endblock %}

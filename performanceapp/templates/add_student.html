@@ -1,0 +1,67 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-user-plus"></i>Add Student</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{% if m.tags == 'error' %}danger{% else%}{{m.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="fullname" class="form-lebel">FullName</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" required placeholder="Enter FullName">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="rollid" class="form-lebel">Roll ID</label>
+            <input type="text" class="form-control" id="rollid" name="rollid" required placeholder="Roll Number" maxlength="12">
+        </div>
+
+        <div class="mb-3">
+            <label for="emailid" class="form-lebel">Email ID</label>
+            <input type="text" class="form-control" id="emailid" name="emailid" required placeholder="Email ID">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-lebel">Gender</label><br/>
+            <div class="'form-check form-check-inline">
+            <input type="radio" checked class="form-check-input" id="gender" name="gender" required value="'Male">
+            <label class="'form-check-label">Male</label>
+            </div>
+            <div class="'form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="gender" name="gender" required value="'Female">
+            <label class="'form-check-label">Female</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="department" class="form-lebel">Select Department</label>
+            <select class="form-select" id="department" name="department" required >
+                <option value="">-- Select Department --</option>
+                {% for i in departments %}
+                <option value="{{i.id}}">{{i.department_name}} - Section {{i.section}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="dob" class="form-lebel">Date Of Birth</label>
+            <input type="date" class="form-control" id="dob" name="dob" required placeholder="Email ID">
+        </div>
+        
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-check-circle me-1"></i>Submit
+        </button>
+    </form>
+</div>
+
+
+{% endblock %}
