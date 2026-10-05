@@ -224,7 +224,7 @@ def edit_student(request,student_id):
         
         try:
             student_obj.name=request.POST.get('fullname')
-            student_obj.rollid=request.POST.get('rollid')
+            student_obj.roll_id=request.POST.get('rollid')
             student_obj.email=request.POST.get('emailid')
             student_obj.gender=request.POST.get('gender')
             student_obj.dob=request.POST.get('dob')
